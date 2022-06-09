@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { Link } from "react-router-dom";
-import { MailOutlineIcon } from '@mui/icons-material';
 import {mobile, landscapeTablets} from '../responsive';
 
 const Container = styled.div`
@@ -41,7 +40,8 @@ const LeftSm = styled.div`
 const Center = styled.div`
 	display: flex;
 	align-items: center; 
-	gap: 20px
+	gap: 20px;
+	${mobile({display: 'none'})}
 `
 const Right = styled.div`
 	display: flex;
@@ -49,7 +49,9 @@ const Right = styled.div`
 	gap: 20px;
 	${landscapeTablets({display: 'none'})}
 `
-const Item = styled(Center)`
+const Item = styled.div`
+	display: flex;
+	align-items: center; 
 	gap: 8px;
 `
 

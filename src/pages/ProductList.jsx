@@ -1,8 +1,7 @@
-import {useEffect, useState} from 'react';
 import {filters} from '../data';
 //redux
 import {useSelector, useDispatch} from 'react-redux';
-import {setColorId, setSizeId} from '../redux/slices/filtersSlice';
+import {setColor, setSize} from '../redux/slices/filtersSlice';
 
 import {mobile} from '../responsive';
 import Announcement from '../components/Announcement.jsx';
@@ -11,6 +10,7 @@ import Footer from '../components/Footer.jsx';
 import styled from 'styled-components';
 import Products from '../components/Products.jsx';
 import Newsletter from '../components/Newsletter.jsx';
+
 
 
 const Container = styled.div`
@@ -41,17 +41,17 @@ const Option = styled.option`
 
 const ProductList = () => {
     const dispatch = useDispatch();
-    const {sizeId, colorId, currentPage} = useSelector( state => state.filters);
+    const {size, color} = useSelector( state => state.filters);
 
     const {Size, Color} = filters;
 
     const onChangeActive = (event, fun) => {
         const valueEvent = event.target.value;
-        //check on a result exists or not
-        if (!(typeof +valueEvent === 'number' && isNaN(valueEvent))) {
-            dispatch(fun(valueEvent))
+
+        if (valueEvent !== "Size" || valueEvent !== "Color") {
+            dispatch(fun(valueEvent.toLowerCase()))
         } else {
-            dispatch(fun(0))
+            dispatch(fun(""))
         }
     };
 
@@ -63,25 +63,25 @@ const ProductList = () => {
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>
-                    <Select onChange={(e) => onChangeActive(e, setSizeId)}>
-                        <Option desabled selected defaultValue={sizeId}>
+                    <Select onChange={(e) => onChangeActive(e, setSize)}>
+                        <Option desabled defaultValue={size}>
                             Size
                         </Option>
                         {
                             Size.map( item => {
-                                const {value, title} = item;
-                               { return <Option key={value} value={value}>{title}</Option>}
+                                const {title} = item;
+                                return <Option key={title} value={title}>{title}</Option>
                             })
                         }
                     </Select>
-                     <Select onChange={(e) => onChangeActive(e, setColorId)}>
-                        <Option desabled selected defaultValue={sizeId}>
+                     <Select onChange={(e) => onChangeActive(e, setColor)}>
+                        <Option desabled defaultValue={color}>
                             Color
                         </Option>
                          {
                             Color.map( item => {
-                                const {value, title} = item;
-                               { return <Option value={value} key={value}>{title}</Option>}
+                                const {title} = item;
+                                return <Option value={title} key={title}>{title}</Option>
                             })
                         }
                     </Select>

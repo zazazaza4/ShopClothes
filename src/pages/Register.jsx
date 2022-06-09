@@ -6,6 +6,10 @@ import {useState} from 'react';
 import regBg from '../assets/backgroundReg.jpg';
 import styled from 'styled-components';
 import  {mobile, laptops, landscapeTablets} from '../responsive';
+//for alerts
+import { toast } from 'react-toastify';
+//axios
+import axios from 'axios';
 
 const Container = styled.div` 
 	width: 100vw;
@@ -72,6 +76,7 @@ const Button = styled.button`
 	}
 `
 const Register = () => {
+	const [isLoading, setIsLoading] = useState(false);
 	const formik = useFormik({
 		initialValues: {
 			name: '',
@@ -100,9 +105,38 @@ const Register = () => {
      .oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required')
 		}),
 		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
-		},
-   });
+			setIsLoading(true);
+			axios({
+			  method: 'post',
+			  url: '/user/12345',
+			  data: {
+			    firstName: 'Fred',
+			    lastName: 'Flintstone'
+			  }
+			}).then( () => {
+				toast.success('Thanks for joining us', {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				});
+				setIsLoading(false);
+			}).catch( () => {
+				toast.error('Something went wrong', {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				});
+				setIsLoading(false);
+			})
+   }});
 
 	return (
 		<Container>
@@ -174,7 +208,7 @@ const Register = () => {
 						By clicking submit you agree to the terms and conditions -
 						<b> PRIVACY POLICY</b>
 					</Agreement>
-					<Button type="submit" >Create</Button>
+					<Button disabled={isLoading} type="submit" >Create</Button>
 				</Form>
 			</Wrapper>
 		</Container>

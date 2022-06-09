@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { Link as LinkRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 //formik
  import { useFormik } from 'formik';
  import * as Yup from 'yup';
@@ -61,7 +61,7 @@ const Button = styled.button`
 	}
 	${landscapeTablets({marginTop: '20px'})}
 `
-const Link = styled.a` 
+const LinkItem = styled.div` 
 	margin: 6px 0;
 	font-size: 16px;
 	cursor: pointer;
@@ -102,9 +102,13 @@ const Login = () => {
 						value={password}
 						onChange={event => setPassword(event.target.value)}
 					/>
-					<Button>Login</Button>
-					<Link>Do not you remember the password ?</Link>
-					<Link>Create a new account</Link>
+					<Button onClick={(e) => e.preventDefault()}>Login</Button>
+					<LinkItem>
+						<Link to='/forgot-password'>Do not you remember the password ?</Link>
+					</LinkItem>
+					<LinkItem>
+						<Link to='/register'>Create a new account</Link>
+					</LinkItem>
 				</Form>
 			</Wrapper>
 		</Container>

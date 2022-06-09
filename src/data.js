@@ -81,49 +81,38 @@ export const popularProducts = [
 export const filters = {
 	"Color": [
 		{
-			"value": 1,
 			"title": "White"
 		},
 		{
-			"value": 2,
 			"title": "Black"
 		},
 		{
-			"value": 3,
 			"title": "Red"
 		},
 		{
-			"value": 4,
 			"title": "Blue"
 		},
 		{
-			"value": 5,
 			"title": "Yellow"
 		},
 		{
-			"value": 6,
 			"title": "Green"
 		},
 	],
 	"Size": [
 		{
-			"value": 1,
 			"title": "XS"
 		},
 		{
-			"value": 2,
 			"title": "S"
 		},
 		{
-			"value": 3,
 			"title": 'M'
 		},
 		{
-			"value": 4,
 			"title": 'L'
 		},
 		{
-			"value": 5,
 			"title": 'XL'
 		},
 	],

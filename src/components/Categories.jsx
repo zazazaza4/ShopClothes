@@ -1,10 +1,8 @@
-import {useEffect, useState} from 'react';
-
 import CategoryItem from './CategoryItem.jsx';
 //style
 import styled from 'styled-components';
 import {categories} from '../data';
-import {mobile, landscapeTablets} from '../responsive';
+import {landscapeTablets} from '../responsive';
 
 const Container = styled.div` 
 	display: flex;

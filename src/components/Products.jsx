@@ -6,11 +6,13 @@ import {
 import Skeleton from './Skeleton.jsx';
 //redux
 import {useSelector, useDispatch} from 'react-redux';
-import {setColorId, setSizeId} from '../redux/slices/filtersSlice';
+import {setColor, setSize} from '../redux/slices/filtersSlice';
+import { fetchProducts } from '../redux/slices/asyncActionsProducts.js';
 
 import styled from 'styled-components';
 import Product from './Product.jsx';
 
+const ErrorMessage = styled.div``
 
 const Container = styled.div` 
 	padding: 20px;
@@ -21,31 +23,41 @@ const Container = styled.div`
 `
 
 const Products = () => {
-	const [products, setProducts] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const {currentPage, categoryId} = useSelector( state => state.filters);
+	const {items, status} = useSelector( state => state.products);
+	const {currentPage, categoryId, searchValue, sort, size, color} = useSelector( state => state.filters);
+
+	const getProducts = () => {
+		const category = categoryId > 0 ?  `${categoryId}` : '';
+		const search = searchValue;
+		const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
+		const sortBy = sort.sortProperty.replace('-', '');
+		const filter = `${color}`;
+
+		dispatch(fetchProducts({
+			category: String(category),
+			search,
+			filter,
+			currentPage,
+			order,
+			sortBy
+		})) 
+		window.scrollTo(0, 0);
+	} 
 
 	useEffect(() => {
-		setIsLoading(true);
-	  const category = categoryId > 0 ?  `${categoryId}` : '';
-
-	  fetch(`https://6293a80e7aa3e6af1a0f013a.mockapi.io/product?page=${currentPage}&limit=8&category=${category}&sortBy=id&order=desc`)
-	       .then( res => res.json())
-	       .then( arr => {
-	         setProducts(arr);
-	         setIsLoading(false);
-	       });
-	}, [categoryId, location.pathname]);
+		getProducts();
+	}, [categoryId, location.pathname, searchValue, currentPage, size, color, sort]);
 
 	const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
-	const renderItems = products.map( item => <Product item={item} key={item.id}/> );
+	const renderItems = items.map( item => <Product item={item} key={item.id}/> );
+	
 	return (
 		<Container>
-			{ isLoading 
-				? skeletons 
-				: renderItems
+			{status === 'ERROR' 
+				? <ErrorMessage>Error</ErrorMessage> 
+				: (status === 'LOADING' ? skeletons : renderItems)
 			}
 		</Container>
 	)

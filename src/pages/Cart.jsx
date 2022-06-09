@@ -1,16 +1,18 @@
 import Announcement from '../components/Announcement.jsx';
 import NavBar from '../components/NavBar.jsx';
 import Footer from '../components/Footer.jsx';
+import CartItem from '../components/CartItem.jsx';
 import styled from 'styled-components';
-//mui
-import ClearIcon from '@mui/icons-material/Clear';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import {mobile, landscapeTablets, laptops} from '../responsive';
+//react router
+import {useNavigate} from 'react-router-dom';
 //redux
 import { useDispatch, useSelector } from 'react-redux';
+import {removeItem} from '../redux/slices/cartSlice';
+//react
+import {useState} from 'react';
 
 const Container = styled.div` 
-
 `
 const Wrapper = styled.div` 
     padding: 20px;
@@ -56,72 +58,6 @@ const Bottom = styled.div`
 const Info = styled.div` 
     flex: 3;
 `
-const Product = styled.div` 
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-`
-const ProductDetail = styled.div` 
-    flex: 2;
-    display: flex;
-`
-const Image = styled.img` 
-    width: 200px;
-`
-const Details = styled.div` 
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-`
-const ProductName = styled.span` 
-   
-`
-const ProductId = styled.span` 
-    
-`
-const ProductColor = styled.div` 
-    flex: 3;
-`
-const ProductSize = styled.span` 
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${props => props.color};
-`
-const PriceDetail = styled.div` 
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-`
-const ProductAmountContainer = styled.div` 
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    svg {
-        cursor: pointer;
-        &:hover {
-            color: grey;
-        } 
-    }
-`
-const ProductAmount = styled.div` 
-    font-size: 24px;
-    margin: 5px;
-
-`
-const ProductPrice = styled.div` 
-    font-size: 24px;
-    font-weight: 200;
-`
-
-const Hr = styled.hr`
-    border: none;
-    height: 1px;
-    background-color: #eee;
-`
 
 const Summary = styled.div` 
     flex: 1;
@@ -160,24 +96,19 @@ const Button = styled.button`
     }
 `
 
-const ProductDelete = styled.div` 
-    position: absolute;
-    top: 0;
-    left: 90%;
-    svg {
-        cursor: pointer;
-        &:hover {
-            color: grey;
-        } 
-    }
-`
-
 const Cart = () => {
     const dispatch = useDispatch();
-    const {items, totalPrice} = useSelector(state => state.cart);
+    const navigate = useNavigate();
+    const [estimatedShipping, setEstimatedShipping] = useState(6.2);
+    const {items, totalPrice, totalCount} = useSelector(state => state.cart);
 
-    const totalCount = 2;//dispatch(getTotalCount());
+    const renderItem = (elements) => {
+        return elements.map( (element) => {
+            return <CartItem item={element}/>
+        })
+    }
 
+    const shippingDiscount = totalPrice >= 50 ? -estimatedShipping : 0;
     return (
         <Container>
             <Announcement/>
@@ -185,7 +116,7 @@ const Cart = () => {
             <Wrapper>
                 <Title>Your bag</Title>
                 <Top>
-                    <TopButton>Continue shopping</TopButton>
+                    <TopButton onClick={() => navigate('/')}>Continue shopping</TopButton>
                     <TopTexts>
                         <TopTexts>Shopping Bag({totalCount})</TopTexts>
                         <TopTexts>Your Wishlist</TopTexts>
@@ -194,47 +125,27 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        <Product>
-                            <ProductDetail>
-                                <Image src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F33%2F15%2F331578a9fdf78d09b6cd39bab2ef5d2f64f62825.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_dresses_bodycon%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/fullscreen]"/>
-                                <Details>
-                                    <ProductName><b>Product:</b> fkskldlak adadad</ProductName>
-                                    <ProductId><b>ID:</b> 121131</ProductId>
-                                    <ProductColor color="black"/>
-                                    <ProductSize><b>Size:</b> 21.3</ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <RemoveIcon/>
-                                    <ProductAmount>1</ProductAmount>
-                                    <AddIcon/>
-                                </ProductAmountContainer>
-                                <ProductPrice>$ 20</ProductPrice>
-                            </PriceDetail>
-                            <ProductDelete>
-                                <ClearIcon />
-                            </ProductDelete>
-                        </Product>
-                        <Hr/>
+                       {
+                         renderItem(items)
+                       }
                     </Info>
                     <Summary>
                         <SummaryTitle>Order summary</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>$ 80</SummaryItemPrice>
+                            <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Shipping</SummaryItemText>
-                            <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                            <SummaryItemPrice>$ {estimatedShipping}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Shipping Discount</SummaryItemText>
-                            <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                            <SummaryItemPrice>$ {shippingDiscount}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>$ 80</SummaryItemPrice>
+                            <SummaryItemPrice>$ {totalPrice + estimatedShipping + shippingDiscount}</SummaryItemPrice>
                         </SummaryItem>
                         <Button>Checkout now</Button>
                     </Summary>

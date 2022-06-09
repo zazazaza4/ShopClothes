@@ -1,8 +1,15 @@
+import { useState } from 'react';
+//style
 import styled from 'styled-components';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from "react-router-dom";
+//redux
+import { useDispatch } from 'react-redux';
+import {addItem} from '../redux/slices/cartSlice';
+//for alerts
+import { toast } from 'react-toastify';
 
 const Info = styled.div` 
 	opacity: 0;
@@ -65,7 +72,9 @@ const Price = styled.div`
 	border-radius: 50% 50% 0 0;
 `
 const Name = styled.div`
-	background: white;
+	transition: all 1s ease;
+	background: ${props => props.desired ? 'teal' : 'white' };
+	color: ${props => props.desired ? 'white' : 'black' };;
 	position: absolute;
 	z-index: 2;
 	bottom: 0;
@@ -80,7 +89,8 @@ const Icon = styled.div`
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
-	background-color: white;
+	color: ${props => props.desired ? 'white' :'black'};
+	background-color: ${props => props.desired ? 'teal' :'white'};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -89,6 +99,7 @@ const Icon = styled.div`
 	&:hover {
 		background-color: #e9f5f5;
 		transform: scale(1.1);
+		color:black;
 	}
 	&:active {
       background-color: teal;
@@ -96,27 +107,47 @@ const Icon = styled.div`
 `
 
 const Product = ({item}) => {
-	const {price, img, id} = item;
+	const {price, img, id, title} = item;
+	const [desired, setDesired] = useState(false);
 	let navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const addOneItemToCart = () => {
+		dispatch(addItem({...item, count: 1}))
+		toast.success('Sucess, the good is added', {
+			position: "bottom-right",
+			autoClose: 2000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: false,
+			progress: undefined,
+			theme: "colored"
+		});
+	} 
 
 	const clickSingleProducts = () => {
 		navigate(`/products/${id}`);
 		window.scrollTo(0, 0);
 	}
-
+	
 	return (
 		<Wrapper>
 			<Container>
 				<Circle/>
 				<Image src={img}/>
-				<Price>{price}$</Price>
-				<Name>Nike v4</Name>
+				<Price >{price}$</Price>
+				<Name desired={desired}>{title}</Name>
 				<Info>
 					<Icon>
-						<ShoppingCartIcon/>
+						<ShoppingCartIcon  onClick={addOneItemToCart}/>
 					</Icon>
-					<Icon>
-						<FavoriteBorderIcon/>
+					<Icon 
+							desired={desired}
+							onClick={ () => {
+								setDesired(desired => !desired)
+							}}>
+						<FavoriteBorderIcon />
 					</Icon>
 					<Icon onClick={clickSingleProducts}>
 						<SearchIcon/>

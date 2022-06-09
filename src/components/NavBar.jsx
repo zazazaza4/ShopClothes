@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import {mobile, landscapeTablets, portraitTablets} from '../responsive';
 
 //redux
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div` 
     height: 60px;
@@ -94,8 +94,7 @@ const MenuItem = styled.div`
 
 const NavBar = () => {
     const [search, setSearch] = useState('');
-    const dispatch = useDispatch();
-    const totalCount = 2;
+    const totalCount = useSelector( state => state.cart.totalCount);
 
     return (
         <Container>
