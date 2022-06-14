@@ -5,7 +5,7 @@ export const sliderItems = [
 		title: 'SUMMER SALE',
 		desc: "Find the hottest new styles with the best prices on sale and clearance clothing at FOREVER 21! Get up to 70% off men's and women's clothing & accessories.",
 		bg: 'f5fafd',
-		category: "1"
+		category: 1
 	},
 	{
 		id: 2,
@@ -13,7 +13,7 @@ export const sliderItems = [
 		title: 'WINTER SALE',
 		desc: "Find the latest styles at affordable prices in our women's clothing sale. Our winter clothes sale is your go-to, from sale jackets to on-trend knitwear.",
 		bg: 'fcf1ed',
-		category: "2"
+		category: 2
 	},
 	{
 		id: 3,
@@ -21,7 +21,7 @@ export const sliderItems = [
 		title: 'SPRING SALE',
 		desc: "Free shipping and returns on all sale & clearance items at Nordstrom.com. Find great prices on top-brand clothing.",
 		bg: 'fbf0f4',
-		category: "3"
+		category: 3
 	},
 ]
 export const categories = [
@@ -29,19 +29,19 @@ export const categories = [
 		"id": 1,
 		"img": "https://lp2.hm.com/hmgoepprod?set=format%5Bwebp%5D%2Cquality%5B79%5D%2Csource%5B%2F2e%2F95%2F2e95ac50e1e2be907d8645835fb39746ed8f4812.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url%5Bfile%3A%2Fproduct%2Fmain%5D",
 		"title": 'DRESSES SALE',
-		category: "4"
+		category: 4
 	},
 	{
 		"id": 2,
 		"img": "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F42%2F36%2F42361811f33e03171a7d20846dc6d0af6508ec88.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVEDETAIL%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/fullscreen]",
 		"title": "JEANS SALE",
-		category: "5"
+		category: 5
 	},
 	{
 		"id": 3,
 		"img": "https://lp2.hm.com/hmgoepprod?set=format%5Bwebp%5D%2Cquality%5B79%5D%2Csource%5B%2Fe2%2F04%2Fe2044d0b327fb9e751ebde18f94a3c42cef036ac.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url%5Bfile%3A%2Fproduct%2Fmain%5D",
 		"title": "SHOES SALE",
-		category: "6"
+		category: 6
 	},
 ]
 
@@ -79,26 +79,6 @@ export const popularProducts = [
 ]
 
 export const filters = {
-	"Color": [
-		{
-			"title": "White"
-		},
-		{
-			"title": "Black"
-		},
-		{
-			"title": "Red"
-		},
-		{
-			"title": "Blue"
-		},
-		{
-			"title": "Yellow"
-		},
-		{
-			"title": "Green"
-		},
-	],
 	"Size": [
 		{
 			"title": "XS"
@@ -118,16 +98,16 @@ export const filters = {
 	],
 	"Sort": [
 		{
-			"value": "newest",
-			"title": "Newest"
+			"sortProperty": "-id",
+			"name": "New Comers"
 		},
 		{
-			"value": "asc",
-			"title": "Price (asc)"
+			"sortProperty": "-price",
+			"name": "Price (asc)"
 		},
 		{
-			"value": "desc",
-			"title": "Price (desc)"
+			"sortProperty": "price",
+			"name": "Price (desc)"
 		},
 	]
 }
