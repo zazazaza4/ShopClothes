@@ -62,7 +62,6 @@ const Products: FC = () => {
 
 	const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 	const renderItems = items.map( (item: any) => <Product {...item} key={item.id}/> );
-	
 	return (
 		<Container>
 			{status === 'ERROR' 

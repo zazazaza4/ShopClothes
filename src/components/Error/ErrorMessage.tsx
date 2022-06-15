@@ -13,8 +13,8 @@ const Container = styled.div`
   text-align: center;
 `
 const Image = styled.img`
-  width: 30%;
-  height: 100%;
+  width: 30em;
+  height: 30em;
 `
 const Text = styled.div`
   font-size: 30px;

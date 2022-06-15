@@ -4,6 +4,7 @@ import Announcement from '../components/Announcement';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import CartItem from '../components/CartItem';
+import CartEmpty from '../components/CartEmpty';
 //style
 import styled from 'styled-components';
 //responsive
@@ -105,9 +106,14 @@ const Cart:FC = () => {
     const {items, totalPrice, totalCount} = useSelector(selectCart);
 
     const renderItem = (elements: CartItemType[]) => {
-        return elements.map( (element) => {
-            return <CartItem {...element}/>
-        })
+
+        if (elements.length > 0) {
+            return elements.map( (element) => {
+                return <CartItem {...element}/>
+            })
+        }
+
+        return <CartEmpty/>
     }
 
     const estimatedShipping = 6;
