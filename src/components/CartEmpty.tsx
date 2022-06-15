@@ -1,6 +1,9 @@
+//style
 import styled from 'styled-components';
-
+//image
 import img from '../assets/EmptyCart.jpg';
+//react-router
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -31,6 +34,7 @@ const Button = styled.button`
     font-size: 20px;
     padding: 10px;
     margin-top: 30px;
+    margin-bottom: 20px;
     font-size: 20px;
     color: white;
     border: none;
@@ -45,20 +49,28 @@ const Button = styled.button`
 `
 
 const CartEmpty = () => {
-  return (
-    <Container>
-        <Image src={img}/>
-        <Text>
-            <Title>Your cart is empty</Title>
-            <Description>
-                Looking like you have not addedanything yo your cart.
-            </Description>  
-            <Button>
-                Go Shopping
-            </Button>
-        </Text>
-    </Container>
-  )
+    let navigate = useNavigate();
+
+    const onGoShopping = () => {
+        console.log('...')
+        navigate(`/products`);
+        window.scrollTo(0, 0);
+    }
+
+    return (
+        <Container>
+            <Image src={img}/>
+            <Text>
+                <Title>Your cart is empty</Title>
+                <Description>
+                    Looking like you have not addedanything yo your cart.
+                </Description>  
+                <Button onClick={onGoShopping}>
+                    Go Shopping
+                </Button>
+            </Text>
+        </Container>
+    )
 }
 
 export default CartEmpty;

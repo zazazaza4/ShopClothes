@@ -27,7 +27,7 @@ const Info = styled.div`
 	justify-content: center;
 	transition: all .5s ease;
 	cursor: pointer;
-	${landscapeTablets({display: 'none'})}
+	${landscapeTablets({opacity: '1', backgroundColor: 'transparent', alignItems: 'flex-start', justifyContent: 'space-around'})}
 `
 const Wrapper = styled.div` 
 	display: flex;
@@ -107,6 +107,7 @@ const Icon = styled.div<{desired?: boolean}>`
 	&:active {
       background-color: teal;
    }
+   ${landscapeTablets({width: '50px', height: '50px', border: '1px solid teal', backgroundColor: '#e9f5f5'})}
 `
 
 type ProductProps = {

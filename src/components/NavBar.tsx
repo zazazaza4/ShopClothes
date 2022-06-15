@@ -120,7 +120,7 @@ const NavBar:FC = () => {
 		window.scrollTo(0, 0);
     }
 
-    const handleKeyPress = (event:  React.KeyboardEvent<SVGSVGElement>) => {
+    const handleKeyPress = (event:  React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === 'Enter'){
             onSearchItems();
         }
@@ -137,11 +137,11 @@ const NavBar:FC = () => {
                             type="text"
                             placeholder="search... "
                             value={value}
+                            onKeyPress={handleKeyPress} 
                             onChange={onChangeInput}
                         />
                         <SearchIcon 
                             onClick={onSearchItems}
-                            onKeyPress={handleKeyPress} 
                             style={{color: 'grey', fontSize: 16, cursor: 'pointer'}}/>
                     </SearchContainer>
                 </Left> 
