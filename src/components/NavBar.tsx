@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import {mobile, landscapeTablets, portraitTablets} from '../responsive';
-
+//react-router
 import { useNavigate, Link } from "react-router-dom";
 //redux
 import { useSelector, useDispatch } from 'react-redux';

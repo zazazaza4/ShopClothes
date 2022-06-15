@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
- 
 `
 const Wrapper = styled.div` 
     height: 50vh;
@@ -20,7 +19,7 @@ const Wrapper = styled.div`
     text-align: center;
 `
 const Error = styled.div`
-${landscapeTablets({width: '80%'})} 
+    ${landscapeTablets({width: '80%'})} 
 `
 const Title = styled.h2`
     font-size: 36px;

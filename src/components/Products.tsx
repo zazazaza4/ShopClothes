@@ -3,7 +3,6 @@ import {useEffect, FC} from 'react';
 import {
   useLocation
 } from "react-router-dom";
-
 //responsive
 import {mobile} from '../responsive';
 //skeleton
@@ -14,11 +13,12 @@ import {useSelector} from 'react-redux';
 import { fetchProducts } from '../redux/slices/products/asyncActionsProducts';
 import {selectFilter } from '../redux/slices/filters/selector'; 
 import {selectProductData} from '../redux/slices/products/selector'; 
-
+//style
 import styled from 'styled-components';
+//components
 import Product from './Product';
+import ErrorMessage from './Error/ErrorMessage';
 
-const ErrorMessage = styled.div``
 
 const Container = styled.div` 
 	padding: 20px;
@@ -57,6 +57,7 @@ const Products: FC = () => {
 
 	useEffect(() => {
 		getProducts();
+		 // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [categoryId, location.pathname, searchValue, currentPage, size, sort.sortProperty]);
 
 	const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
@@ -65,7 +66,7 @@ const Products: FC = () => {
 	return (
 		<Container>
 			{status === 'ERROR' 
-				? <ErrorMessage>Error</ErrorMessage> 
+				? <ErrorMessage/>
 				: (status === 'LOADING' ? skeletons : renderItems)
 			}
 		</Container>

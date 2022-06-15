@@ -1,6 +1,11 @@
+import { Suspense } from 'react';
+//
 import ReactDOM from 'react-dom/client';
+//style
 import './index.css';
+//components
 import App from './components/App';
+import Spinner from './components/Spinner/Spinner';
 //react-router-dom
 import {
   BrowserRouter as Router,
@@ -17,7 +22,9 @@ if (rootElem) {
   root.render(
       <Provider store={store}>
         <Router>
-          <App />
+          <Suspense fallback={<Spinner/>}>
+            <App />
+          </Suspense>
         </Router>
       </Provider>
   );
