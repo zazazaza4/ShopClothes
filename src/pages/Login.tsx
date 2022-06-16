@@ -1,11 +1,11 @@
 import {useState, FC} from "react";
 import { Link } from "react-router-dom";
-
 //style
 import styled from 'styled-components';
 import loginBg from '../assets/backgroundLog.jpg';
 import  {laptops, landscapeTablets} from '../responsive';
-
+//helmet
+import {Helmet} from 'react-helmet';
 
 const Container = styled.div` 
 	width: 100vw;
@@ -79,6 +79,9 @@ const Login:FC = () => {
 
 	return (
 		<Container>
+			<Helmet>
+                <title>LOG IN - DROP US - Official Website</title>
+            </Helmet>
 			<Wrapper>
 				<Title>SIGN IN</Title>
 				<Form>

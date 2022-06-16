@@ -1,4 +1,4 @@
-import {useState, useCallback, FC} from 'react';
+import {useState, useCallback, FC, useEffect, useRef} from 'react';
 
 import debounce from 'lodash.debounce';
 
@@ -100,7 +100,16 @@ const NavBar:FC = () => {
     const [value, setValue] = useState<string>('');
     let navigate = useNavigate();
     const dispatch = useDispatch();
-    const {totalCount} = useSelector(selectCart);
+    const {totalCount, items} = useSelector(selectCart);
+    const isMounted = useRef(false);
+
+    useEffect( () => {
+        if(isMounted.current) {
+            const json = JSON.stringify(items);
+            localStorage.setItem('cart', json);
+        }
+        isMounted.current = true;
+    }, [items]);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateSearchValue = useCallback(

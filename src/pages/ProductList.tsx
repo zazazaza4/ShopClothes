@@ -6,14 +6,17 @@ import { useAppDispatch } from '../redux/store';
 import { selectFilter } from '../redux/slices/filters/selector';
 import {useSelector} from 'react-redux';
 import {setSize, setSort} from '../redux/slices/filters/filtersSlice';
-
+//responsive
 import {mobile} from '../responsive';
+//components
 import Announcement from '../components/Announcement';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import styled from 'styled-components';
 import Products from '../components/Products';
 import Newsletter from '../components/Newsletter';
+//helmet
+import {Helmet} from 'react-helmet';
 
 
 
@@ -76,6 +79,13 @@ const ProductList: FC = () => {
 
     return (
         <Container>
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Latest trends in clothing for women, men & kids at DROP online. Find new arrivals, fashion catalogs, collections & lookbooks every week."
+                />
+                <title>=Clothes - DROP. Ukraine</title>
+            </Helmet>
             <NavBar/>
             <Announcement/>
             <Title>Clothes</Title>

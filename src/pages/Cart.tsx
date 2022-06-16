@@ -15,6 +15,8 @@ import {useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../redux/slices/cart/selector';
 import { CartItem as CartItemType } from '../redux/slices/cart/types';
+//helmet
+import {Helmet} from 'react-helmet';
 
 
 const Container = styled.div` 
@@ -121,6 +123,9 @@ const Cart:FC = () => {
     const allSum = totalPrice === 0 ? 0 : totalPrice + estimatedShipping + shippingDiscount;
     return (
         <Container>
+            <Helmet>
+                <title>Cart - DROP. US</title>
+            </Helmet>
             <Announcement/>
             <NavBar/>
             <Wrapper>

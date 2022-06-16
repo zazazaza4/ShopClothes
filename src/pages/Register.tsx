@@ -10,6 +10,9 @@ import  {mobile, laptops, landscapeTablets} from '../responsive';
 import { toast } from 'react-toastify';
 //axios
 import axios from 'axios';
+//helmet
+import {Helmet} from 'react-helmet';
+
 
 const Container = styled.div` 
 	width: 100vw;
@@ -140,6 +143,9 @@ const Register: FC = () => {
 
 	return (
 		<Container>
+			<Helmet>
+                <title>CREATE ACCOUNT - DROP US - Official Website</title>
+            </Helmet>
 			<Wrapper>
 				<Title>CREATE AN ACCOUNT</Title>
 				<Form onSubmit={formik.handleSubmit}>

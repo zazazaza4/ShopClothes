@@ -1,13 +1,16 @@
+//components
 import Announcement from '../components/Announcement';
 import NavBar from '../components/NavBar';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-
+//responsive
 import {landscapeTablets} from '../responsive';
-
+//react-router
 import { Link } from 'react-router-dom';
-
+//style
 import styled from 'styled-components';
+//helmet
+import {Helmet} from 'react-helmet';
 
 const Container = styled.div`
 `
@@ -46,6 +49,9 @@ const Button = styled(Link)`
 const Page404 = () => {
     return (
         <Container>
+            <Helmet>
+                <title>Page was not found - DROP. US</title>
+            </Helmet>
             <Announcement/>
             <NavBar/>
             <Wrapper>

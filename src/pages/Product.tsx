@@ -16,6 +16,8 @@ import {addItem} from '../redux/slices/cart/cartSlice';
 import { CartItem } from '../redux/slices/cart/types';
 //for alerts
 import { toast } from 'react-toastify';
+//helmet
+import {Helmet} from 'react-helmet';
 
 
 const Container = styled.div` 
@@ -224,9 +226,16 @@ const Products = () => {
 			    console.log(error);
 			})
 	}, [productId]);
-
+	//TEXTURED FITTED BLAZER - Ecru / Green | ZARA Ukraine
 	return (
 		<Container>
+			<Helmet>
+                <meta
+                    name="description"
+                    content="Latest trends in clothing for women, men & kids at DROP online. Find new arrivals, fashion catalogs, collections & lookbooks every week."
+                />
+                <title>{title} | DROP US</title>
+			</Helmet>
             <NavBar/>
          	<Announcement/>
          	<Wrapper>
