@@ -76,6 +76,7 @@ const FilterColor = styled.div`
  	width: 20px;
  	height: 20px;
  	border-radius: 50%;
+	 border: 0.5px solid black;
  	background-color: ${(props) => props.color};
  	margin: 0px 5px;
  	cursor: pointer;

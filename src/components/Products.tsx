@@ -32,7 +32,7 @@ const Container = styled.div`
 `
 const Wrapper = styled.div`
 	height: 40vh;
-	width: 100%;
+	width: 100vw;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
