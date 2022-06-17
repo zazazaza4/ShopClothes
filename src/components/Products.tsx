@@ -61,10 +61,10 @@ const Products: FC = () => {
 	const location = useLocation();
 	const dispatch = useAppDispatch();
 	const {items, status} = useSelector(selectProductData);
-	const {currentPage, categoryId, searchValue, sort, size} = useSelector(selectFilter);
+	const {currentPage, categoryName, searchValue, sort, size} = useSelector(selectFilter);
 
 	const getProducts = async () => {
-		const category = categoryId > 0 ?  `${categoryId}` : '';
+		const category = categoryName;
 		const search = searchValue;
 		const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
 		const sortBy = sort.sortProperty.replace('-', '');
@@ -86,7 +86,7 @@ const Products: FC = () => {
 	useEffect(() => {
 		getProducts();
 		 // eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [categoryId, location.pathname, searchValue, currentPage, size, sort.sortProperty]);
+	}, [categoryName, location.pathname, searchValue, currentPage, size, sort.sortProperty]);
 
 	const renderProducts = (items: ProductType[]) => {
 		if (items.length <= 0) {

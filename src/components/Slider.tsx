@@ -11,7 +11,7 @@ import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutl
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 //redux
 import { useDispatch } from 'react-redux';
-import {setCategoryId} from '../redux/slices/filters/filtersSlice';
+import {setCategoryName} from '../redux/slices/filters/filtersSlice';
 
 const Container = styled.div` 
    height: 100vh;
@@ -110,8 +110,8 @@ const Slider: FC = () => {
 	const dispatch = useDispatch();
 	let navigate = useNavigate();
 
-	const changeNavigate = (id: number) => {
-		dispatch(setCategoryId(id));
+	const changeNavigate = (name: string) => {
+		dispatch(setCategoryName(name));
 		navigate("/products");
 		window.scrollTo(0, 0);
 	}

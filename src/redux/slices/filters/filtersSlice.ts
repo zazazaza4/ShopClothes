@@ -3,7 +3,7 @@ import {FilterSliceState, Sort, SortPropertyEnum } from './types';
 
 const initialState: FilterSliceState = {
   searchValue: '',
-  categoryId: 0,
+  categoryName: 'product',
   currentPage: 1,
   size: '',
   sort: {
@@ -19,8 +19,8 @@ export const filterSlice = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    setCategoryId(state, action: PayloadAction<number>) {
-      state.categoryId = action.payload;
+    setCategoryName(state, action: PayloadAction<string>) {
+      state.categoryName = action.payload;
     },
     setSort(state, action: PayloadAction<Sort>) {
       state.sort = action.payload;
@@ -34,6 +34,6 @@ export const filterSlice = createSlice({
   },
 })
 
-export const {setSearch, setSize, setCategoryId, setSort } = filterSlice.actions
+export const {setSearch, setSize, setCategoryName, setSort } = filterSlice.actions
 
 export default filterSlice.reducer

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { landscapeTablets, laptops} from '../responsive';
 //redux
 import { useDispatch } from 'react-redux';
-import {setCategoryId} from '../redux/slices/filters/filtersSlice';
+import {setCategoryName} from '../redux/slices/filters/filtersSlice';
 
 const Container = styled.div` 
 	flex: 1;
@@ -59,15 +59,15 @@ const Button = styled.h2`
 type itemCategory = {
 	img: string;
 	title: string;
-	category: number;
+	category: string;
 }
 
 const CategoryItem:FC<itemCategory> = ({img, title, category}) => {
 	let navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	function handleClick(id: number) {
-		dispatch(setCategoryId(id));
+	function handleClick(category: string) {
+		dispatch(setCategoryName(category));
 		navigate("/products");
 		window.scrollTo(0, 0);
 	}

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useMemo} from 'react';
 //data
 import {filters} from '../data';
 //redux
@@ -51,7 +51,7 @@ type sizeItem = {
 
 const ProductList: FC = () => {
     const dispatch = useAppDispatch();
-    const {size} = useSelector(selectFilter);
+    const {size, categoryName} = useSelector(selectFilter);
 
     const {Size, Sort} = filters;
 
@@ -77,6 +77,7 @@ const ProductList: FC = () => {
         dispatch(setSort(valueEvent));
     }
 
+    const firstUpperCaseTtile = useMemo( () => categoryName[0].toUpperCase() + categoryName.slice(1), [categoryName]);
     return (
         <Container>
             <Helmet>
@@ -84,16 +85,16 @@ const ProductList: FC = () => {
                     name="description"
                     content="Latest trends in clothing for women, men & kids at DROP online. Find new arrivals, fashion catalogs, collections & lookbooks every week."
                 />
-                <title>=Clothes - DROP. Ukraine</title>
+                <title>{firstUpperCaseTtile} - DROP. US</title>
             </Helmet>
             <NavBar/>
             <Announcement/>
-            <Title>Clothes</Title>
+            <Title>{firstUpperCaseTtile}</Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>
                     <Select onChange={onChangeActiveSize}>
-                        <Option disabled defaultValue={size}>
+                        <Option selected disabled defaultValue={size}>
                             Size
                         </Option>
                         {

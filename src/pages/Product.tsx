@@ -11,8 +11,10 @@ import Footer from '../components/Footer';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 //redux
+import {useSelector} from 'react-redux';
 import { useAppDispatch } from '../redux/store';
 import {addItem} from '../redux/slices/cart/cartSlice';
+import {selectFilter } from '../redux/slices/filters/selector'; 
 import { CartItem } from '../redux/slices/cart/types';
 //for alerts
 import { toast } from 'react-toastify';
@@ -149,6 +151,7 @@ const Products = () => {
 	const [amount, setAmount] = useState<number>(1);
 
 	const {img, color = [], size = [], desc, title = "", price, id} = product as ProductType;
+	const {categoryName} = useSelector(selectFilter);
 
 	const [sizeChosen,  setSizeChosen] = useState('');
 	const [colorChosen,  setColorChosen] = useState('');
@@ -219,14 +222,14 @@ const Products = () => {
 
 	useEffect(() => {
 		setIsLoading(true)
-		axios.get(`https://6293a80e7aa3e6af1a0f013a.mockapi.io/product?id=${productId}`)
+		axios.get(`https://6293a80e7aa3e6af1a0f013a.mockapi.io/${categoryName}?id=${productId}`)
 			.then(res => res.data[0])
 			.then(loadedProduct)
 			.catch((error) => {
 			    console.log(error);
 			})
-	}, [productId]);
-	//TEXTURED FITTED BLAZER - Ecru / Green | ZARA Ukraine
+	}, [productId, categoryName]);
+
 	return (
 		<Container>
 			<Helmet>
