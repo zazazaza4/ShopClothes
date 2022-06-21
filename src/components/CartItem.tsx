@@ -43,6 +43,7 @@ const ProductSize = styled.div`
     margin-top: 10px;
 `
 const ProductColor = styled.span` 
+    border: 0.1 solid grey;
     width: 20px;
     height: 20px;
     border-radius: 50%;
