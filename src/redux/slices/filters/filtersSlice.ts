@@ -1,16 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {FilterSliceState, Sort, SortPropertyEnum } from './types';
+import {FilterSliceState, Sort } from './types';
+import {getFiltersFromLS} from '../../../utils/getFiltersFromLocalStorage';
 
-const initialState: FilterSliceState = {
-  searchValue: '',
-  categoryName: 'product',
-  currentPage: 1,
-  size: '',
-  sort: {
-    name: 'New Comers',
-    sortProperty: SortPropertyEnum.ID_ASC
-  }
-}
+const initialState: FilterSliceState = getFiltersFromLS();
 
 export const filterSlice = createSlice({
   name: 'filters',

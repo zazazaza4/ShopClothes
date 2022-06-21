@@ -1,4 +1,4 @@
-import {FC, useMemo} from 'react';
+import {FC, useEffect, useMemo, useRef} from 'react';
 //data
 import {filters} from '../data';
 //redux
@@ -54,6 +54,16 @@ const ProductList: FC = () => {
     const {size, categoryName} = useSelector(selectFilter);
 
     const {Size, Sort} = filters;
+
+    const categoryChange = useRef<boolean>(true);
+
+    useEffect( () => {
+        if(categoryChange.current) {
+            const json = JSON.stringify(categoryName);
+            localStorage.setItem('category', json);
+        }
+        categoryChange.current = false;
+    }, [categoryName]);
 
     const onChangeActiveSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const valueEvent = event.target.value;
